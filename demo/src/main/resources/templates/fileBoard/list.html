@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>파일게시판-리스트페이</title>
+
+    <style type="text/css">
+      li {
+        list-style: none;
+        float: left;
+      }
+    </style>
+
+  </head>
+  
+  <body>
+    <div>
+    
+    <div style="padding: 10px; text-align: center;">
+      <h1><a th:href="@{/fileBoard/list}" style="text-decoration: none;">파일자료실</a></h1>
+    </div>
+    
+    <!--/* 타임리프 관련 태그에 내용이 없어도 무적권 에러ㅇㅅㅇ */-->
+    
+    <div>
+      <table>
+      <thead style="text-align: center;">
+        <tr>
+          <th style="text-align: center;">순서</th>
+          <th style="text-align: center;">작성자</th>
+          <th style="text-align: center;">제목</th>
+          <th style="text-align: center;">작성일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="data : ${testlist}" th:onclick=
+"'window.location.href = \'' + @{/fileBoard/detail/{bno}(bno=${data.b_no})} + '\''">
+          <td th:text="${data.b_no}" style="cursor: pointer; text-align: center;"></td>     
+          <td th:text="${data.writer}" style="cursor: pointer; text-align: center;"></td>
+          <td th:text="${data.title}" style="cursor: pointer; text-align: center;"></td>
+          <td th:text="${data.reg_date}" style="cursor: pointer; text-align: center;"></td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+    
+    <div style="text-align: right;">
+      <button onclick="location.href='/fileBoard/insert'">글작성</button>
+    </div>
+    
+    <br/><br/><br/>
+    </div>
+  </body>
+</html>
