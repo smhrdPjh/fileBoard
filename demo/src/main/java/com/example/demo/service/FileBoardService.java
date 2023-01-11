@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.FileBoardVO;
+import com.example.demo.bean.FileVO;
 import com.example.demo.mapper.FileBoardMapper;
 
 @Service
@@ -18,7 +19,11 @@ public class FileBoardService {
   public List<FileBoardVO> getFileBoardList() {
     return fileboardmapper.getFileBoardList();
   }
-
+  
+  public int fileInsert(FileVO file) {
+	    return fileboardmapper.fileInsert(file);
+	  }
+ 
 
   public FileBoardVO fileBoardDetail(int b_no) {
     return fileboardmapper.fileBoardDetail(b_no);
@@ -37,6 +42,11 @@ public class FileBoardService {
 
   public int fileBoardDelete(int bno) {
     return fileboardmapper.fileBoardDelete(bno);
+  }
+  
+ 
+  public FileVO fileDetail(int b_no) {
+    return fileboardmapper.fileDetail(b_no);
   }
 
 }

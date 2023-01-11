@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.bean.FileBoardVO;
+import com.example.demo.bean.FileVO;
 
 
 
@@ -21,10 +22,13 @@ public interface FileBoardMapper {
 	
 	
 	  List<FileBoardVO> getFileBoardList(); 
+	  int fileInsert(FileVO file);
 	  
 	  FileBoardVO fileBoardDetail(int b_no); 
 	  
 	  int fileBoardInsert(FileBoardVO fileBoard); 
+	  
+	  FileVO fileDetail(int b_no);
 	  
 	  int fileBoardUpdate(FileBoardVO fileBoard); 
 	  

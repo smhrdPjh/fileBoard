@@ -32,4 +32,18 @@
     DELETE FROM file_board WHERE b_no=#{b_no}
   </delete>
   
+   <insert id="fileInsert" parameterType="com.example.demo.bean.FileVO">
+    <selectKey keyProperty="b_no" resultType="int" order="BEFORE">
+      SELECT MAX(b_no)
+      FROM file_board
+    </selectKey>
+    
+    INSERT INTO file(b_no, filename, fileoriginname, fileurl) 
+    VALUES(#{b_no}, #{filename}, #{fileoriginname}, #{fileurl})
+  </insert>
+  
+  <select id="fileDetail" parameterType="int" resultType="com.example.demo.bean.FileVO">
+    SELECT * FROM file WHERE b_no=#{b_no}
+  </select>
+  
 </mapper>

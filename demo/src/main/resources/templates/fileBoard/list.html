@@ -30,6 +30,7 @@
           <th style="text-align: center;">작성자</th>
           <th style="text-align: center;">제목</th>
           <th style="text-align: center;">작성일</th>
+          <label style="font-weight: bolder;">첨부파일</label>
         </tr>
       </thead>
       <tbody>
@@ -39,6 +40,11 @@
           <td th:text="${data.writer}" style="cursor: pointer; text-align: center;"></td>
           <td th:text="${data.title}" style="cursor: pointer; text-align: center;"></td>
           <td th:text="${data.reg_date}" style="cursor: pointer; text-align: center;"></td>
+            <p>
+    <a th:if="${file}" th:href="@{/fileBoard/fileDown/{bno}(bno=${file.b_no})}">
+  [[${file.fileoriginname}]]
+    </a>
+  </p>
         </tr>
       </tbody>
       </table>
