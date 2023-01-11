@@ -92,23 +92,26 @@ files, HttpServletRequest request) throws IllegalStateException, IOException, Ex
       fileBoardService.fileBoardInsert(board);
       
     } else {
-      String fileName = files.getOriginalFilename(); // 사용자 컴에 저장된 파일명 그대로
-      //확장자
+      String fileName = files.getOriginalFilename(); // 파일명 그대로
+      //확장자추출?
       String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
-      File destinationFile; // DB에 저장할 파일 고유명
-      String destinationFileName;
-      //절대경로 설정 안해주면 지 맘대로 들어가버려서 절대경로 박아주었습니다.
+      File destinationFile; // 파일생성을 위한 file타입의 destinationFile이라는 변수 선언.
+      String destinationFileName; //db에저장될 파일이름 선언
+      
+     
    
       String fileUrl = "C:/Users/Kim/Desktop/here/";
 
       do { //우선 실행 후
         //고유명 생성
-        destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
-        destinationFile = new File(fileUrl + destinationFileName); //합쳐주기
+        destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;//파일이름 만들기
+        destinationFile = new File(fileUrl + destinationFileName); //url로가서 파일생성(destinationFileName이름으로 생성됨)
       } while (destinationFile.exists()); 
 
-      destinationFile.getParentFile().mkdirs(); //디렉토리
-      files.transferTo(destinationFile);
+      destinationFile.getParentFile().mkdirs(); //디렉토리생성!!!!
+      files.transferTo(destinationFile);// 업로드 처리 => 설명 : 받아온 객체를 업로드 처리하지 않으면 임시파일에 저장된 파일이 자동적으로 삭제되기 때문에 MultipartFile객체의 transferTo() 메서드를 이용해서 업로드처리를 해야 함.
+
+
 
       fileBoardService.fileBoardInsert(board);
 
@@ -123,6 +126,7 @@ files, HttpServletRequest request) throws IllegalStateException, IOException, Ex
     
     return "forward:/fileBoard/list"; //객체 재사용
   }
+  
   @RequestMapping("/fileDown/{b_no}")
   private void fileDown(@PathVariable("b_no") int b_no, HttpServletRequest request, 
   HttpServletResponse response) throws UnsupportedEncodingException, Exception {
